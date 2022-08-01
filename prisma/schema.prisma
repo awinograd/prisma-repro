@@ -8,6 +8,9 @@ generator client {
 }
 
 model User {
-  id    Int     @id @default(autoincrement())
+  id      Int      @id @default(autoincrement())
+  secrets String[] @db.Uuid
 
+
+  @@index([secrets])
 }
