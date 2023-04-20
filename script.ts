@@ -1,16 +1,23 @@
-import { PrismaClient } from '@prisma/client'
+import { Prisma, PrismaClient } from "@prisma/client";
 
-const prisma = new PrismaClient()
+const prisma = new PrismaClient().$extends({
+  query: {
+    $allModels: {
+      $allOperations({ model, operation, args, query }) {
+        return query(args);
+      },
+    },
+  },
+});
 
-// A `main` function so that you can use async/await
 async function main() {
-  // ... you will write your Prisma Client queries here
+  await prisma.user.create({ data: { config: Prisma.DbNull, email: "" } });
 }
 
 main()
-  .catch(e => {
-    throw e
+  .catch((e) => {
+    throw e;
   })
   .finally(async () => {
-    await prisma.$disconnect()
-  })
+    await prisma.$disconnect();
+  });
