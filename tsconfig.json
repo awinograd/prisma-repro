@@ -2,8 +2,9 @@
   "compilerOptions": {
     "sourceMap": true,
     "outDir": "dist",
+    "composite": true,
     "strict": true,
-    "lib": ["esnext", "dom"],
+    "lib": ["esnext"],
     "esModuleInterop": true
   }
 }

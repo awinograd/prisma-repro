@@ -1,16 +1,7 @@
-import { PrismaClient } from '@prisma/client'
+import { PrismaClient, type Prisma } from "@prisma/client";
 
-const prisma = new PrismaClient()
+export function getDbClient(options: Prisma.PrismaClientOptions) {
+  const client = new PrismaClient(options).$extends({});
 
-// A `main` function so that you can use async/await
-async function main() {
-  // ... you will write your Prisma Client queries here
+  return client;
 }
-
-main()
-  .catch(e => {
-    throw e
-  })
-  .finally(async () => {
-    await prisma.$disconnect()
-  })
